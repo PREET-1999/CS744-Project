@@ -1,5 +1,16 @@
 #!/bin/bash
 set -e
+# --- Prevent running as root or with sudo ---
+if [ "$EUID" -eq 0 ]; then
+  echo "❌ ERROR: Do not run this script with sudo or as root."
+  echo ""
+  echo "➡️  Make sure your user is in the 'docker' group. To fix:"
+  echo "    sudo usermod -aG docker \$USER"
+  echo "    newgrp docker"
+  echo ""
+  echo "Then re-run this script *without* sudo."
+  exit 1
+fi
 # Default values for volume mounting
 DEFAULT_MOUNT_DIR=$(pwd)
 USER_ID=$(id -u)

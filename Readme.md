@@ -4,3 +4,6 @@ This project is focused on conducting load testing and performance evaluation fo
 
 
 
+Make Sure the user is in docker group, if not run
+sudo usermod -aG docker $USER
+newgrp docker
