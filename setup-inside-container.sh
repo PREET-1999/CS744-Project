@@ -96,3 +96,6 @@ for variant in openj9; do
   "$BASE_DIR/jdk/jdk25/$variant/openj9-openjdk-jdk25/build/linux-x86_64-server-release/images/jdk/bin/java" -version
   echo
 done
+
+export JAVA_HOME="$BASE_DIR/jdk/jdk25/openj9/openj9-openjdk-jdk25/build/linux-x86_64-server-release/images/jdk"
+export PATH="$JAVA_HOME/bin:$PATH"
