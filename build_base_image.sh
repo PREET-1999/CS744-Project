@@ -18,7 +18,7 @@ if [ $? -ne 0 ]; then
 else
     echo "Download successful. File saved as $OUTPUT_FILE"
 fi
-Make the script executable
+# Make the script executable
 echo "Making $OUTPUT_FILE executable..."
 chmod +x "$OUTPUT_FILE"
 
