@@ -65,9 +65,10 @@ Run the following script to create a client-server setup which will enable to ru
 bash setup-inside-container.sh
 ```
 
-### 4 Update the ~/.bashrc to set ENV variables
+### 4 Update the ENV when launching a shell(or put in bashrc)
 ```bash
-source ~/.bashrc
+export JAVA_HOME="./jdk/jdk25/openj9/openj9-openjdk-jdk25/build/linux-x86_64-server-release/images/jdk"
+export PATH="$JAVA_HOME/bin:$PATH"
 ```
 
 ### 5 Test JITServer Client-Server Setup
