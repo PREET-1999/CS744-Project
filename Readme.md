@@ -1,6 +1,6 @@
 # JITServer Load Testing and Performance Evaluation
 
-This project is focused on conducting load testing and performance evaluation for the **OpenJ9 JITServer**, a distributed runtime system where Just-In-Time (JIT) compilation is offloaded to a server. The goal is to analyze and optimize the client–server setup by evaluating various workloads and introduces an enhancement to demonstrate dual request paths on top of which performance would be evaluated
+This project is focused on conducting load testing and performance evaluation for the **OpenJ9 JITServer**, a distributed runtime system where Just-In-Time (JIT) compilation is offloaded to a server. The goal is to analyze and optimize the client–server setup by evaluating various workloads .It introduces an enhancement to demonstrate dual request paths(Memory and Disk) on top of which performance would be evaluated
 
 
 This project extends the OpenJ9 JITServer with a new runtime option(to support requests going to disk):
@@ -96,3 +96,17 @@ If you would like to test the disk-write path (extended functionality), start th
 jitserver -XX:+JITServerSaveCompilationsToDisk
 ```
 After each successful compilation, the server writes the compiled method names to a file (***compiled_methods.txt*** relative to cwd) on disk.
+
+### Note : Repositories Used
+
+This project uses two primary repositories:
+
+1. **[OpenJ9](<https://github.com/PREET-1999/CS744-Project-Openj9>)**  
+   - The main Just-In-Time (JIT) compiler and runtime implementation used in this project.  
+   - Contains the core JIT code where modifications and file read/write operations were added.  
+
+2. **[OMR](<https://github.com/PREET-1999/CS744-Project-OMR>)**  
+   - A foundational library that provides the compiler and runtime infrastructure used by OpenJ9.  
+   - OpenJ9 depends on OMR for low-level utilities, compiler technology, and platform abstraction layers.  
+
+Both repositories are tightly coupled **OpenJ9 builds on top of OMR**.
