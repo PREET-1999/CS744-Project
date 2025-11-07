@@ -1,6 +1,14 @@
 # JITServer Load Testing and Performance Evaluation
 
-This project is focused on conducting load testing and performance evaluation for the **OpenJ9 JITServer**, a distributed runtime system where Just-In-Time (JIT) compilation is offloaded to a server. The goal is to analyze and optimize the client–server setup by evaluating various workloads and identifying performance bottlenecks.
+This project is focused on conducting load testing and performance evaluation for the **OpenJ9 JITServer**, a distributed runtime system where Just-In-Time (JIT) compilation is offloaded to a server. The goal is to analyze and optimize the client–server setup by evaluating various workloads and introduces an enhancement to demonstrate dual request paths on top of which performance would be evaluated
+
+
+This project extends the OpenJ9 JITServer with a new runtime option(to support requests going to disk):
+```bash
+jitserver -XX:+JITServerSaveCompilationsToDisk
+```
+
+When enabled, the JITServer saves the names of compiled methods to a file after each successful compilation.
 
 ---
 
@@ -66,7 +74,7 @@ source ~/.bashrc
 
 To test the client-server setup, open **two terminal sessions** inside the container:
 
-**Terminal 1:** Start the JITServer by running:
+**Terminal 1:** Start the server(JITServer:server) by running:
 ```bash
 jitserver
 ```
@@ -76,3 +84,15 @@ If you are able to see the output
 
 The Server is successfully able to accept requests
 
+
+**Terminal 2:** Start the client(JITServer:client) by running:
+```bash
+java "-XX:+UseJITServer" -version
+```
+(you could use any other java class, for testing Ive used -version)
+
+If you would like to test the disk-write path (extended functionality), start the server with the new flag:
+```bash
+jitserver -XX:+JITServerSaveCompilationsToDisk
+```
+After each successful compilation, the server writes the compiled method names to a file (***compiled_methods.txt*** relative to cwd) on disk.
